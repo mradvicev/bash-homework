@@ -6,8 +6,8 @@ SUBNET=$3
 HOST=$4
 
 if [[ $EUID -ne 0 ]]; then
-   echo "Error: must be with root"
-   exit 1
+    echo "Error: must be with root"
+    exit 1
 fi
 
 REGEX_PREFIX='^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$'
@@ -15,13 +15,13 @@ REGEX_INTERFACE='^[a-zA-Z0-9._-]+$'
 REGEX_NUMBER='^([1-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$'
 
 if [[ ! $PREFIX =~ $REGEX_PREFIX ]]; then
-   echo "Error: Prefix must be first argument. example 192.168"
-   exit 1
+    echo "Error: Prefix must be first argument. example 192.168"
+    exit 1
 fi
 
 if [[ ! $INTERFACE =~ $REGEX_INTERFACE ]]; then
-   echo "Error: Inerface must be second argument."
-   exit 1
+    echo "Error: Inerface must be second argument."
+    exit 1
 fi
 
 validate_ip() {
@@ -43,9 +43,9 @@ validate_ip() {
         HOST_START=1
         HOST_END=255
     fi
-    echo "$SUBNET_START $SUBNET_END $HOST_START $HOST_END"
 }
-read -r SUBNET_START SUBNET_END HOST_START HOST_END <<< $(validate_ip)
+
+validate_ip
 
 trap 'echo "Ping exit (Ctrl-C)"; exit 1' 2
 
